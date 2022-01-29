@@ -154,22 +154,36 @@
 			    public function valid() { return ! is_null($this->_value); }
 			}
 
-			$filename = "messages";
+                        function printFile($f) {
+                                foreach ($f as $line) {
 
-			$f = new ReverseFile($filename);
+                                        $color = "";
+                                        if (preg_match("/daemon\.info dnsmasq/", $line)) {$color = "gray";}
+                                        if (preg_match("/cron\.info/i", $line)) {$color = "blue";}
+                                        if (preg_match("/(is 0\.0\.0\.0|is NODATA)/", $line)) {$color = "red";}
 
-			foreach ($f as $line) {
+                                        echo '<span style="color:' . $color . '">' . $line . '</span>';
+                                        echo "<br />";
+                                }
+                        }
 
-				$color = "";
-				if (preg_match("/daemon\.info dnsmasq/", $line)) {$color = "gray";}
-				if (preg_match("/cron\.info/i", $line)) {$color = "blue";}
-				if (preg_match("/(is 0\.0\.0\.0|is NODATA)/", $line)) {$color = "red";}
-				
-				echo '<span style="color:' . $color . '">' . $line . '</span>';
-				echo "<br />";
-			}
 
-			echo "<br /> END OF FILE. Loaded at " . date("H:i:sa") ;
+                        $filename = "messages";
+
+                        // Printing the syslog
+                        $f = new ReverseFile($filename);
+                        printFile($f);
+
+                        // Printing the logrotated syslogs, if any
+                        for ($i = 0; $i <= 4; $i++) {
+                                if (file_exists($filename.".".$i)) {
+                                        echo "FOUND " . $filename.".".$i." ";
+                                        $f = new ReverseFile($filename.".".$i);
+                                        printFile($f);
+                                }
+                        }
+
+                        echo "<br /> END OF FILE. Loaded at " . date("H:i:sa") ;
 
 
 ?>

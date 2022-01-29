@@ -50,7 +50,7 @@
 			    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 			    // Output the result in an element with id="demo"
-			    document.getElementById("timeup").innerHTML = seconds;
+			    document.getElementById("timeup").innerHTML = minutes * 60 + seconds;
 			}, 1000);
 
 </script>
@@ -62,7 +62,7 @@
 		It is <?php echo date("H:i:sa") ?> 
 		<button onClick="window.location.reload();">Refresh Page</button>
 		Loaded for <div style="display: inline" id="timeup"></div> seconds.	
-		<input type="checkbox" onclick="toggleAutoRefresh(this);" id="reloadCB"> Auto Refresh 3s
+		<input type="checkbox" onclick="toggleAutoRefresh(this);" id="reloadCB"> Auto Refresh 5s
 		<button onClick="setStartDate();">setStartDate</button>
 
 	

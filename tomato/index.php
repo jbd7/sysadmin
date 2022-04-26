@@ -1,7 +1,6 @@
 <a href="syslog.php">syslog</a>
 <br /><br />
 
-<a href="devices.asp">devices</a>
 <a href="phpinfo.php">phpinfo</a>
 <a href="index.html">nginx homepage</a>
 <html>
@@ -27,7 +26,6 @@
 <br /><br />
 
 <hr5>
-<a href="devices.asp">devices</a>
 <a href="phpinfo.php">phpinfo</a>
 <a href="index2.html">nginx homepage</a>
 </h5>
@@ -35,7 +33,7 @@
 
 <h4>hosts.dnsmasq</h4>
         <?php
-           echo prep2print('hosts.dnsmasq');
+           echo prep2print('/tmp/etc/hosts.dnsmasq');
         ?>
 
 

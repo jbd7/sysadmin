@@ -168,7 +168,7 @@
                         }
 
 
-                        $filename = "messages";
+                        $filename = "/var/log/messages";
 
                         // Printing the syslog
                         $f = new ReverseFile($filename);

@@ -25,6 +25,12 @@
 </h3>
 <br /><br />
 
+<?php
+echo 'User IP Address - '.$_SERVER['REMOTE_ADDR'].'</BR>';
+echo 'Server Local IP Address - '.$_SERVER['SERVER_ADDR'].'</BR>';
+echo 'Server External IP Address - '.file_get_contents("http://ipecho.net/plain").'</BR>';
+?>
+
 <hr5>
 <a href="phpinfo.php">phpinfo</a>
 <a href="index2.html">nginx homepage</a>

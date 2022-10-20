@@ -18,7 +18,7 @@ CPU_USAGE_01AVG=$(cat /proc/loadavg | awk '{print $1 * 100}')
 if [ $CPU_USAGE_15AVG -ge $STRESSLIMIT ]; then
  DATE=$(date "+%F %H:%M:%S")
  CPU_USAGE1="$DATE CPU: $CPU_USAGE"
- echo "STRESS \t $CPU_USAGE1" >> /tmp/cpusage.out
+ echo $(printf "$CPU_USAGE1 \t STRESS") >> /tmp/cpusage.out
  cat /tmp/cpusage.out |tail -5 > /tmp/cpusage.tmp
  echo "" >> /tmp/cpusage.tmp
  echo $(ps auxh --sort=-c | awk 'NR<=5 {printf "ps:  %5s %6d %s\r\n",$3,$2,$11}') >> /tmp/cpusage.tmp
@@ -26,7 +26,7 @@ if [ $CPU_USAGE_15AVG -ge $STRESSLIMIT ]; then
 elif [ $CPU_USAGE_01AVG -ge $SPIKELIMIT ]; then
  DATE=$(date "+%F %H:%M:%S")
  CPU_USAGE1="$DATE CPU: $CPU_USAGE"
- echo "SPIKE \t $CPU_USAGE1" >> /tmp/cpusage.out
+ echo $(printf "$CPU_USAGE1 \t SPIKE") >> /tmp/cpusage.out
  cat /tmp/cpusage.out |tail -5 > /tmp/cpusage.tmp
  echo "" >> /tmp/cpusage.tmp
  echo $(ps auxh --sort=-c | awk 'NR<=5 {printf "ps:  %5s %6d %s\r\n",$3,$2,$11}') >> /tmp/cpusage.tmp
@@ -34,7 +34,7 @@ elif [ $CPU_USAGE_01AVG -ge $SPIKELIMIT ]; then
 else
  DATE=$(date "+%F %H:%M:%S")
  CPU_USAGE1="$DATE CPU: $CPU_USAGE"
- echo "OK \t $CPU_USAGE1" >> /tmp/cpusage.out
+ echo $(printf "$CPU_USAGE1 \t OK") >> /tmp/cpusage.out
  cat /tmp/cpusage.out |tail -2016 > /tmp/cpusage.tmp
  mv /tmp/cpusage.tmp /tmp/cpusage.out
 fi
